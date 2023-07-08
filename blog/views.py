@@ -28,7 +28,7 @@ def post_detail(request, year, month, day, post):
     else:
         comment_form = CommentForm()
     return render(request,
-                  'blog/detail.html',
+                  'main/detail.html',
                  {'post': post,
                   'comments': comments,
                   'comment_form': comment_form})
@@ -37,17 +37,17 @@ class PostListView(ListView):
     queryset = Post_2.objects.all()
     context_object_name = 'posts'
     paginate_by = 3
-    template_name = 'blog/list.html'
+    template_name = 'main/list.html'
 
 
 def contact(request):
-    return render(request, 'blog/contact.html')
+    return render(request, 'main/contact.html')
 
 def about(request):
     
-    return render(request, 'blog/about.html')
+    return render(request, 'main/about.html')
 
 def login(request):
-    return render(request, 'blog/login.html')
+    return render(request, 'main/login.html')
 
         
