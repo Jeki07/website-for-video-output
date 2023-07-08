@@ -1,0 +1,60 @@
+{% extends "main/base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+
+    <div class="post_detail">
+        <div class="features">
+            <h1>{{ post.title }}</h1>
+            <p class="post_text">{{ post.body }}</p>
+            <video width="800" controls>
+                <source src="{{ STATIC_ROOT }}/media/{{ post.video }}" type="video/mp4">
+            </video>
+            <p class="date">
+                Опубликовано в {{ post.publish }} От {{ post.author }}
+            </p>
+        </div>
+    </div>
+
+    {% with comments.count as total_comments %}
+        <h2 class="comment_title">
+            {{ total_comments }} Комментарий{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}
+
+    
+    
+    <div class="while_color">
+        {% if new_comment %}
+            <h2>Ваш комментарий был добавлен.</h2>
+        {% else %}
+        <div class="register-container">
+            <h2>Добавить новый комментарий</h2>
+            <form action="." method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <p>{{ comment_form.name }}</p>
+                    <p>{{ comment_form.body }}</p>
+                </div>
+                <button type="submit" class="btn btn-warning">Добавить </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="conteiner_comment">
+        {% for comment in comments %}
+            <div class="comment">
+                <p class="info">
+                    <h1 class="comment_author">{{ comment.name }}</h1>
+                    <h3 class="comment_author">{{ comment.created }}</h3>
+                </p>
+                <div class="comment_body">
+                    {{ comment.body|linebreaks }}
+                </div>
+                <p></p>
+            </div>
+        {% empty %}
+            <p>Комментариев пока нет.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="pagination">
+    <span class="text">
+            <p>
+                {% if page.has_previous %}
+                    <a href="?page={{ page.previous_page_number }}"><button class="btn btn-primary"><-Назад</button></a>
+                {% endif %}
+                Страница {{ page.number }}-{{ page.paginator.num_pages }}
+        
+                {% if page.has_next %}
+                    <a href="?page={{ page.next_page_number }}"><button class="btn btn-primary">Далее-></button></a>
+                {% endif %}
+            </p>
+    </span>
+</div>
